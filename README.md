@@ -1,7 +1,6 @@
 # University Research Opportunity Portal
 
-**GitHub Repository:** https://github.com/YOUR-USERNAME/research-opportunity-portal
-
+**GitHub Repository:** https://github.com/XA1F-0/CN_Assignment_1
 ## Project description
 A web application where faculty members post, view, update, close and delete research opportunities in one place. It replaces scattered emails, WhatsApp groups and noticeboards. Computer Networks Assignment 1.
 
