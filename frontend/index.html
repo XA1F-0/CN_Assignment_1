@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Research Opportunity Portal</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Research Opportunity Portal</h1>
+
+  <div id="message"></div>
+
+  <h2>All Opportunities</h2>
+  <table>
+    <thead>
+      <tr><th>ID</th><th>Title</th><th>Faculty</th><th>Deadline</th><th>Status</th><th>Actions</th></tr>
+    </thead>
+    <tbody id="tableBody"></tbody>
+  </table>
+
+  <div id="details" class="box" hidden></div>
+
+  <h2 id="formTitle">Add Opportunity</h2>
+  <form id="form" class="box" novalidate>
+    <label>Title <input id="title"></label>
+    <label>Description <textarea id="description" rows="3"></textarea></label>
+    <label>Research area <input id="research_area"></label>
+    <label>Faculty name <input id="faculty_name"></label>
+    <label>Department <input id="department"></label>
+    <label>Required skills <input id="required_skills"></label>
+    <label>Available positions <input id="available_positions" type="number" min="1"></label>
+    <label>Application deadline <input id="application_deadline" type="date"></label>
+    <label>Status
+      <select id="status"><option>Open</option><option>Closed</option></select>
+    </label>
+    <button type="submit" id="saveBtn">Save</button>
+    <button type="button" id="cancelBtn" hidden>Cancel edit</button>
+  </form>
+
+  <script src="script.js"></script>
+</body>
+</html>
