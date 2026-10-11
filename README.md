@@ -148,3 +148,12 @@ Browser (Frontend)
 - **CORS:** browsers block a page from calling a server on a different origin (different port counts) unless the server allows it. `app.use(cors())` allows it.
 - **Frontend to backend:** JavaScript `fetch()` sends HTTP requests to the API.
 - **Backend to database:** `mysql2` sends SQL (INSERT, SELECT, UPDATE, DELETE) to MySQL.
+
+## Troubleshooting
+If the app shows "Internal server error" or the server console prints "Access denied", MySQL is rejecting the login in `.env`. This is common on Ubuntu, where `root` has no password login. Create a dedicated user and put its details in `.env`:
+```sql
+CREATE USER 'portal_user'@'localhost' IDENTIFIED BY 'your_password';
+GRANT ALL PRIVILEGES ON research_portal.* TO 'portal_user'@'localhost';
+FLUSH PRIVILEGES;
+```
+Then set `DB_USER=portal_user` and `DB_PASSWORD=your_password` in `.env`, and restart with `npm start`.
