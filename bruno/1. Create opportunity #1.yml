@@ -1,0 +1,40 @@
+info:
+  name: "1. Create opportunity #1"
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: "{{baseUrl}}/api/opportunities"
+  headers:
+    - name: Content-Type
+      value: application/json
+  body:
+    type: json
+    data: |-
+      {
+        "title": "Federated Learning for Medical Imaging",
+        "description": "Train image models across hospitals without sharing patient data.",
+        "research_area": "Machine Learning",
+        "faculty_name": "Dr. Ayesha Khan",
+        "department": "Computer Science",
+        "required_skills": "Python, PyTorch, Statistics",
+        "available_positions": 2,
+        "application_deadline": "2026-12-15",
+        "status": "Open"
+      }
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: after-response
+      code: |-
+        test('Status code is 201', function () { expect(res.getStatus()).to.equal(201); });
+        if (!bru.getCollectionVar('opportunityId')) { bru.setCollectionVar('opportunityId', res.getBody().id); }
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false

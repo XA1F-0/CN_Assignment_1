@@ -1,0 +1,33 @@
+info:
+  name: 10. Invalid data (400)
+  type: http
+  seq: 10
+
+http:
+  method: POST
+  url: "{{baseUrl}}/api/opportunities"
+  headers:
+    - name: Content-Type
+      value: application/json
+  body:
+    type: json
+    data: |-
+      {
+        "title": "",
+        "available_positions": -2,
+        "application_deadline": "tomorrow",
+        "status": "Maybe"
+      }
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: after-response
+      code: test('Status code is 400', function () { expect(res.getStatus()).to.equal(400); });
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false

@@ -1,0 +1,40 @@
+info:
+  name: 7. Change status Open to Closed
+  type: http
+  seq: 7
+
+http:
+  method: PUT
+  url: "{{baseUrl}}/api/opportunities/{{opportunityId}}"
+  headers:
+    - name: Content-Type
+      value: application/json
+  body:
+    type: json
+    data: |-
+      {
+        "title": "Federated Learning for Medical Imaging (Phase 2)",
+        "description": "Train image models across hospitals without sharing patient data.",
+        "research_area": "Machine Learning",
+        "faculty_name": "Dr. Ayesha Khan",
+        "department": "Computer Science",
+        "required_skills": "Python, PyTorch, Docker",
+        "available_positions": 4,
+        "application_deadline": "2027-02-28",
+        "status": "Closed"
+      }
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: after-response
+      code: |-
+        test('Status code is 200', function () { expect(res.getStatus()).to.equal(200); });
+        test('Status is Closed', function () { expect(res.getBody().status).to.eql('Closed'); });
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false

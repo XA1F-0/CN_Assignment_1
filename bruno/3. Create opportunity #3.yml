@@ -1,0 +1,38 @@
+info:
+  name: "3. Create opportunity #3"
+  type: http
+  seq: 3
+
+http:
+  method: POST
+  url: "{{baseUrl}}/api/opportunities"
+  headers:
+    - name: Content-Type
+      value: application/json
+  body:
+    type: json
+    data: |-
+      {
+        "title": "Pashto Speech Dataset Collection",
+        "description": "Build an open speech corpus for Pashto speech recognition.",
+        "research_area": "Natural Language Processing",
+        "faculty_name": "Dr. Sara Malik",
+        "department": "Data Science",
+        "required_skills": "Python, Linguistics, Audio Processing",
+        "available_positions": 1,
+        "application_deadline": "2027-01-20",
+        "status": "Open"
+      }
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: after-response
+      code: test('Status code is 201', function () { expect(res.getStatus()).to.equal(201); });
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false

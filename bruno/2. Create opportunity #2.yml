@@ -1,0 +1,38 @@
+info:
+  name: "2. Create opportunity #2"
+  type: http
+  seq: 2
+
+http:
+  method: POST
+  url: "{{baseUrl}}/api/opportunities"
+  headers:
+    - name: Content-Type
+      value: application/json
+  body:
+    type: json
+    data: |-
+      {
+        "title": "Secure Communication for IoT Sensors",
+        "description": "Design a lightweight encryption scheme for low-power sensors.",
+        "research_area": "Cybersecurity",
+        "faculty_name": "Dr. Imran Ali",
+        "department": "Computer Science",
+        "required_skills": "C, Networking, Cryptography",
+        "available_positions": 3,
+        "application_deadline": "2026-11-30",
+        "status": "Open"
+      }
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: after-response
+      code: test('Status code is 201', function () { expect(res.getStatus()).to.equal(201); });
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
