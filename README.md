@@ -11,7 +11,7 @@ A web application where faculty members post, view, update, close and delete res
 | Backend | Node.js + Express.js (REST API) |
 | Database | MySQL |
 | Frontend | HTML, CSS, vanilla JavaScript (`fetch()`) |
-| Testing | Postman |
+| Testing | Bruno (a Postman collection is also included) |
 | Version control | Git + GitHub |
 
 ## Features
@@ -34,6 +34,7 @@ research-opportunity-portal/
 │   └── script.js                         fetch() calls to the API
 ├── database/schema.sql
 ├── postman/Research-Opportunity-Portal.postman_collection.json
+├── bruno/                                Bruno API test collection
 ├── .env.example
 ├── .gitignore
 ├── package.json
@@ -108,11 +109,16 @@ Error example: `{ "message": "Research opportunity not found." }`
 
 Validation rules: all fields are required; `available_positions` must be a positive whole number; `application_deadline` must be a valid `YYYY-MM-DD` date; `status` must be `Open` or `Closed`.
 
-## Postman testing
-1. Start the backend.
-2. In Postman choose **Import** and select `postman/Research-Opportunity-Portal.postman_collection.json`.
-3. Run requests **1 to 10 in order** (or use the Collection Runner):
+## Testing with Bruno
+1. Start the backend (`npm start`).
+2. Open Bruno, choose **Open Collection**, and select the `bruno/` folder in this project.
+3. Set the `baseUrl` variable to `http://localhost:3000` if it is empty.
+4. Run requests **1 to 10 in order**:
    create x3, get all, get one, update, Open to Closed, delete, get deleted (404), invalid data (400).
+
+Expected status codes: 201, 201, 201, 200, 200, 200, 200, 200, 404, 400.
+
+A Postman version of the same collection is in `postman/`.
 
 ## How it works (Computer Networks concepts)
 
